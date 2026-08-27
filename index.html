@@ -4,21 +4,33 @@
 <meta charset="utf-8">
 <style>
   html,body{margin:0;padding:0;overflow:hidden;background:#000;height:100%;}
+
   .stage-wrap{
-    width:100%;
-    max-width:992px;
-    aspect-ratio:992/624;
-    margin:0 auto;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
-  .stage-wrap embed{
+
+  .stage-wrap .inner{
+    width:min(100vw, 100vh * (760/480));
+    height:min(100vh, 100vw * (480/760));
+  }
+
+  .stage-wrap .inner embed{
     width:100%;
     height:100%;
+    display:block;
   }
 </style>
+<script src="ruffle.js"></script>
 </head>
 <body>
   <div class="stage-wrap">
-    <embed src="ilha.swf" width="100%" height="100%">
+    <div class="inner">
+      <embed src="ilha.swf" width="100%" height="100%">
+    </div>
   </div>
 </body>
 </html>
