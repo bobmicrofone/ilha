@@ -1,36 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<style>
-  html,body{margin:0;padding:0;overflow:hidden;background:#000;height:100%;}
-
-  .stage-wrap{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .stage-wrap .inner{
-    width:min(100vw, 100vh * (760/480));
-    height:min(100vh, 100vw * (480/760));
-  }
-
-  .stage-wrap .inner embed{
-    width:100%;
-    height:100%;
-    display:block;
-  }
-</style>
-<script src="ruffle.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Flash Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #player-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    ruffle-player {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+  </style>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
-  <div class="stage-wrap">
-    <div class="inner">
-      <embed src="ilha.swf" width="100%" height="100%">
-    </div>
-  </div>
+  <div id="player-container"></div>
+
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      "letterbox": "on",
+      "autoplay": "on",
+      "unmuteOverlay": "hidden",
+      "scale": "showAll",
+      "forceScale": true
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const player = ruffle.createPlayer();
+      const container = document.getElementById("player-container");
+      container.appendChild(player);
+
+      // Put the relative path or filename of your SWF file here
+      player.load({
+        url: "ilha.swf" // e.g. "game.swf" or whatever your .swf is named in the repo
+      });
+    });
+  </script>
 </body>
 </html>
