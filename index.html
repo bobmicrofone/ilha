@@ -2,28 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flash Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ilha Flash Game</title>
   <style>
     * {
       box-sizing: border-box;
-    }
-    html, body {
       margin: 0;
       padding: 0;
-      width: 100vw;
-      height: 100vh;
-      max-width: 100%;
-      max-height: 100%;
-      overflow: hidden;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
-    #player-container {
+    html, body {
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+    #container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -37,28 +35,26 @@
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
-  <div id="player-container"></div>
+  <div id="container"></div>
 
   <script>
     window.RufflePlayer = window.RufflePlayer || {};
     window.RufflePlayer.config = {
-      "letterbox": "on",
       "autoplay": "on",
+      "splashScreen": false,
       "unmuteOverlay": "hidden",
-      "scale": "showAll",
-      "forceScale": true
+      "letterbox": "on",
+      "forceScale": true,
+      "scale": "showAll"
     };
 
     window.addEventListener("DOMContentLoaded", () => {
       const ruffle = window.RufflePlayer.newest();
       const player = ruffle.createPlayer();
-      const container = document.getElementById("player-container");
+      const container = document.getElementById("container");
       container.appendChild(player);
 
-      // Put the relative path or filename of your SWF file here
-      player.load({
-        url: "ilha.swf" // e.g. "game.swf" or whatever your .swf is named in the repo
-      });
+      player.load("https://bobmicrofone.github.io/ilha/ilha.swf");
     });
   </script>
 </body>
